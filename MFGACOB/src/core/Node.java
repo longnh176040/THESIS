@@ -1,6 +1,7 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Node {
     public int domain; //used for IDPC-NDU only
@@ -13,12 +14,17 @@ public class Node {
 
     public Node() { }
 
-    public Node(int domain) {
+    public Node(int domain) { //used for IDPC-NDU only
 		this.domain = domain;
     }
 
     public void AddToBlacklist(ArrayList<Integer> domainString) {
-        //TODO: Sort the domain string before saving to the blacklist
+        //Sort the domain string before saving to the blacklist except the last domain
+        int lastElement = domainString.get(domainString.size()-1);
+        domainString.remove(domainString.size()-1);
+        
+        Collections.sort(domainString);
+        domainString.add(lastElement);
 
         blackList.add(domainString);
     }
