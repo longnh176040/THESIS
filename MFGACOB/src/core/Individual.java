@@ -1,7 +1,7 @@
 package core;
 
 public class Individual {
-    int taskNum, chromosomeLength;
+    public int taskNum, chromosomeLength;
     
     public double[] chromosome;
     public double[] fitness;

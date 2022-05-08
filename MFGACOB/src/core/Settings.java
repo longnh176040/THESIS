@@ -21,6 +21,11 @@ public class Settings {
 
     //=============SA-MFEA params=============
     public static final int MFEA_GENERATION = 20; 
-    public static final int MFEA_POPULATION_SIZE = 25; 
+    public static final int MFEA_POPULATION_SIZE = 25;
+
+    public static final int HISTORICAL_MEMORY_SIZE = 30;
+
     
+    //=============REPRODUCTION params=============
+    public static final int SBX_n = 2;
 }
