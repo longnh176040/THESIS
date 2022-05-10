@@ -63,6 +63,9 @@ public class ACO {
 		}
     }
 
+    /*
+        Khởi tạo pheromone trên tất cả các cạnh
+    */
     public void InitPheromone(Task task, double pheromone, double delta) {
         for (int i = 0; i < task.nodeList.size(); i++) {
 			for (int j = 0; j < task.nodeList.get(i).outNodeList.size(); j++) {

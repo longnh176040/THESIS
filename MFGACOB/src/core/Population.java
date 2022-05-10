@@ -3,15 +3,16 @@ package core;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 public class Population {
-    ArrayList<Individual> population;
+    int popSize; //Kích thước quần thể
+    public ArrayList<Individual> population;
     Task[] tasks;
     int chromosomeLength = -1;
     int taskNum;
 
-    public Population(Task[] tasks) {
+    public Population(Task[] tasks, int popSize) {
+        this.popSize = popSize;
         this.taskNum = tasks.length;
         this.tasks = tasks;
         for(Task t: tasks){
@@ -21,7 +22,7 @@ public class Population {
     }
 
     public void InitPopulation() {
-        for (int i = 0; i < Settings.MFEA_POPULATION_SIZE; i++) {
+        for (int i = 0; i < this.popSize; i++) {
             Individual individual = new Individual(taskNum, chromosomeLength);
             individual.RandomInit();
             individual.EvaluateFitness(tasks);
