@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class Population {
-    int popSize; //Kích thước quần thể
+    public int popSize; //Kích thước quần thể
     public ArrayList<Individual> population;
     Task[] tasks;
     int chromosomeLength = -1;
@@ -25,7 +25,7 @@ public class Population {
         for (int i = 0; i < this.popSize; i++) {
             Individual individual = new Individual(taskNum, chromosomeLength);
             individual.RandomInit();
-            individual.EvaluateFitness(tasks);
+            individual.EvaluateFitnessAllTasks(tasks);
             population.add(individual);
         }
     }
@@ -87,5 +87,16 @@ public class Population {
         //Giữ lại số cá thể = kích thước quần thể
         if(population.size()> Settings.MFEA_POPULATION_SIZE) 
             population.subList(Settings.MFEA_POPULATION_SIZE, size).clear();  
+    }
+
+    public void SwapIndividuals(Individual i1, Individual i2) {
+        for(int i=1; i <= i1.chromosomeLength; i++){
+            if (Settings.random.nextDouble() > 0.5){
+                double temp1 = i1.chromosome[i-1];
+                double temp2 = i2.chromosome[i-1];
+                i1.chromosome[i-1] = temp2;
+                i2.chromosome[i-1] = temp1;
+            }
+        }
     }
 }

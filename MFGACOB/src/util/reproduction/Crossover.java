@@ -15,9 +15,9 @@ public class Crossover {
         for (int i = 0; i < betas.length; i++) {
             double u = Settings.random.nextDouble();
             if(u <= 0.5) {
-                betas[i] = Math.pow((2*u), 1.0/(Settings.SBX_n + 1));
+                betas[i] = Math.pow((2*u), 1.0/(Settings.SBX_nc + 1));
             } else {
-                betas[i] = Math.pow((2*(1-u)), -1.0/(Settings.SBX_n + 1));
+                betas[i] = Math.pow((2*(1-u)), -1.0/(Settings.SBX_nc + 1));
             }
         }
 

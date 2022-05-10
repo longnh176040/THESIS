@@ -44,7 +44,7 @@ public class Individual {
         return newChromosome;
     }
 
-    public void EvaluateFitness(Task[] tasks) {
+    public void EvaluateFitnessAllTasks(Task[] tasks) {
         //Đánh giá cá thể với từng tác vụ
         for (int i = 0; i < tasks.length; i++) {
             double[] tChromosome;
@@ -57,8 +57,30 @@ public class Individual {
 
             ACO tACO = new ACO();
             tACO.UpdatePheromone(tasks[i]);
-
             this.cost[i] = tACO.AntFindingPath(tasks[i], tChromosome);
+            this.fitness[i] = 1/ (double) this.cost[i];
+        }
+    }
+
+    public void EvaluateFitnessBestTask(Task[] tasks) {
+        //Đánh giá cá thể với từng tác vụ
+        for (int i = 0; i < tasks.length; i++) {
+            if (i == skill_factor) {
+                double[] tChromosome;
+                if (chromosomeLength > tasks[i].domainNumber) {
+                    tChromosome = ChromosomeFixer(chromosome, tasks[i].domainNumber);
+                }
+                else {
+                    tChromosome = this.chromosome;
+                }
+
+                ACO tACO = new ACO();
+                tACO.UpdatePheromone(tasks[i]);
+                this.cost[i] = tACO.AntFindingPath(tasks[i], tChromosome);
+            }
+            else {
+                this.cost[i] = Integer.MAX_VALUE;
+            }
             this.fitness[i] = 1/ (double) this.cost[i];
         }
     }

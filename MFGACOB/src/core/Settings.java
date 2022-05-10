@@ -27,5 +27,6 @@ public class Settings {
 
     
     //=============REPRODUCTION params=============
-    public static final int SBX_n = 2;
+    public static final int SBX_nc = 2;
+    public static final int PM_nm = 2;
 }
