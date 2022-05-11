@@ -27,6 +27,8 @@ public class SA_MFEA {
 
     Random random;
 
+    int generation = 0; //Biến dùng để đếm số thế hệ
+
     public SA_MFEA(Task[] tasks, int popSize, int historical_memory_size) {
         this.tasks = tasks;
         this.popSize = popSize;
@@ -41,7 +43,75 @@ public class SA_MFEA {
         random = Settings.random;
     }
 
-    
+    public ArrayList<Individual> run (int seed, double[][] convergenceTrend) {
+        long start =  System.currentTimeMillis();
+
+        //Khởi tạo bộ nhớ lịch sử
+        for (int i = 0; i < tasks.length; i++) {
+            for (int j = i + 1; j < tasks.length; j++) {
+                for (int k = 0; k < historical_memory_size; k++) {
+                    historical_memory[i][j][k] = historical_memory[j][i][k] = 0.5;
+                }
+                memoryPos[i][j] = memoryPos[j][i] = 0;
+            }
+        }
+
+        random = new Random(seed);
+        ArrayList<Individual> bestIndividuals = new ArrayList<Individual>();
+
+        //Khởi tạo quần thể đầu tiên
+        Population population = new Population(tasks, popSize);
+        population.InitPopulation();
+        population.UpdateRank();
+        population.UpdateScalarFitness();
+        population.Selection();
+
+        generation = 1;
+        for (int i = 1; i <= tasks.length; i++) {
+            for (Individual ind : population.population) {
+                if (ind.skill_factor == i) 
+                {   //Cập nhật các cá thể có fitness lớn nhất
+                    convergenceTrend[generation - 1][i - 1] = ind.fitness[i - 1];
+                    bestIndividuals.add(ind);
+                    break;
+                }
+            }
+        }
+
+        while (generation < Settings.MFEA_GENERATION) {
+            generation++;
+            ArrayList<Individual> offspringPopulation = Reproduction(population);
+            population.population.addAll(offspringPopulation);
+            population.UpdateRank();
+            population.UpdateScalarFitness();
+            population.Selection();
+
+            for (int i = 1; i <= tasks.length; i++) {
+                for (Individual ind : population.population) {
+                    if (ind.skill_factor == i) 
+                    {   //Cập nhật các cá thể có fitness lớn nhất
+                        if (bestIndividuals.get(i-1).fitness[i-1] > ind.fitness[i-1]) {
+                            bestIndividuals.set(i-1, ind);
+                        }
+                        convergenceTrend[generation-1][i-1] = bestIndividuals.get(i-1).fitness[i-1];
+                        break;
+                    }
+                }
+            }
+        }
+        System.out.println("Seed " + seed);
+        for (int i = 1; i <= tasks.length; i++) {
+            System.out.println("Skill factor: " + bestIndividuals.get(i - 1).skill_factor + 
+            " Fitness: " + bestIndividuals.get(i - 1).fitness[i - 1] +
+            " Cost: " + bestIndividuals.get(i - 1).cost[i - 1]
+            );
+
+        }
+        long end =  System.currentTimeMillis();
+        System.out.println(end-start);
+
+        return bestIndividuals;
+    }
 
     public ArrayList<Individual> Reproduction(Population population) {
         //Quần thể con sau quá trình reproduction

@@ -32,7 +32,7 @@ public class ACO {
                 }
 
                 //Nếu đường đi tìm thấy tốt hơn localBest thì cập nhật 
-                if (curPath.cost < localBestPath.cost) {
+                if (curPath != null && curPath.cost < localBestPath.cost) {
                     localBestPath.CopyPath(curPath);
                 }
                 numAnt--;

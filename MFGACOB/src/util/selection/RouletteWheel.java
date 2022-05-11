@@ -22,7 +22,7 @@ public class RouletteWheel {
         double rand = Settings.random.nextDouble();
 
         if (rand <= pe[0]) return candidateEdges.get(0);
-        else if (rand > pe[pe.length]) return candidateEdges.get(candidateEdges.size());
+        else if (rand > pe[pe.length-1]) return candidateEdges.get(candidateEdges.size());
         else {
             for (int i = 1; i < pe.length; i++) {
 				if (rand > pe[i - 1] && rand <= pe[i]) {

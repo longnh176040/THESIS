@@ -2,10 +2,10 @@ package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
+import algorithm.SA_MFEA;
+import core.Settings;
 import core.Task;
 import util.io.DataIO_EDU;
 
@@ -13,25 +13,28 @@ public class Main {
     public static Scanner scanner;
 
     public static void main(String[] args) throws Exception {
-        // try {
-        //     File file = new File("data\\IDPC-EDU-data\\set1\\idpc_10x5x425.idpc");
-        //     Task task = DataIO_EDU.TaskInit(file);
-        //     DataIO_EDU.PrintTask(task);
-        // }
-        // catch (FileNotFoundException e){
-        //     System.out.println("ERROR 404: File not found!");
-		// 	e.printStackTrace();
-        // }
+        try {
+            File directory = new File("data\\IDPC-EDU-data\\set1");
+            Task[] tasks = DataIO_EDU.ReadFolder(directory);
 
-        ArrayList<Integer> ai = new ArrayList<Integer>();
-        ai.add(5);
-        ai.add(1);
-        ai.add(2);
-        ai.add(9);
-        ai.add(7);
-        ArrayList<Integer> ai1 = new ArrayList<Integer>();
-        ai1.add(7);
-        ai1.add(2);
-        System.out.print(ai.containsAll(ai1));
+            // for (Task task : tasks) {
+            //     DataIO_EDU.PrintTask(task);
+            // }
+
+            SA_MFEA sa_MFEA = new SA_MFEA(tasks, Settings.MFEA_POPULATION_SIZE, Settings.HISTORICAL_MEMORY_SIZE);
+
+            double sum[] = new double[tasks.length];
+            double[][][] convergenceTrend = new double[Settings.SIMULATION_TIME][Settings.MFEA_GENERATION][tasks.length];
+            for (int i = 0; i < Settings.SIMULATION_TIME; i++) {
+                sa_MFEA.run(i, convergenceTrend[i]);
+                for (int k = 0; k < tasks.length; k++) {
+                    sum[k] += convergenceTrend[i][Settings.MFEA_GENERATION-1][k] / Settings.SIMULATION_TIME;
+                }
+            }
+        }
+        catch (FileNotFoundException e){
+            System.out.println("ERROR 404: File not found!");
+			e.printStackTrace();
+        }
     }
 }

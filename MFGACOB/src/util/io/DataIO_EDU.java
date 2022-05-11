@@ -12,6 +12,17 @@ import core.Task;
 import main.Main;
 
 public class DataIO_EDU {
+
+    public static Task[] ReadFolder(File directory) throws FileNotFoundException {
+        File[] listFiles = directory.listFiles();
+        Task[] tasks = new Task[listFiles.length];
+
+        for (int i = 0; i < tasks.length; i++) {
+            tasks[i] = TaskInit(listFiles[i]);
+        }
+        return tasks;
+    }
+    
     public static Task TaskInit(File file) throws FileNotFoundException {
         Main.scanner = new Scanner(file);
 

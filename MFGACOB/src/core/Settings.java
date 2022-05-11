@@ -2,7 +2,9 @@ package core;
 import java.util.Random;
 
 public class Settings {
-    public static Random random;
+    public static Random random = new Random();
+
+    public static int SIMULATION_TIME = 30; //Số lần chạy thuật toán
 
     //=============ACO params=============
     public static final int ANT_GENERATION = 5;
