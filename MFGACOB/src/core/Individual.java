@@ -31,12 +31,15 @@ public class Individual {
 
     public void RandomInit() {
         for(int i = 0; i < chromosome.length; i++) {
-            this.chromosome[i] = Settings.random.nextDouble();
+            double c = Settings.random.nextDouble(Double.MIN_VALUE, 1);
+            this.chromosome[i] = c;
+            //System.out.print(this.chromosome[i] + " ");
         }
+        //System.out.println();
     }
 
     public double[] ChromosomeFixer(double[] chromosome, int length) {
-        //Sửa độ dài cá thể chỉ giữ lại bằng 
+        //Sửa độ dài cá thể chỉ giữ lại bằng số miền
         double[] newChromosome = new double[length];
         for (int i = 0; i < newChromosome.length; i++) {
             newChromosome[i] = chromosome[i];
@@ -55,11 +58,19 @@ public class Individual {
                 tChromosome = this.chromosome;
             }
 
+            // for (int j = 0; j < tChromosome.length; j++) {
+            //     System.out.print(tChromosome[j] + " ");
+            // }
+            // System.out.println();
+
             ACO tACO = new ACO();
             tACO.UpdatePheromone(tasks[i]);
             this.cost[i] = tACO.AntFindingPath(tasks[i], tChromosome);
+            //System.out.print(this.cost[i] + " ");
             this.fitness[i] = 1/ (double) this.cost[i];
+            //System.out.print(this.fitness[i] + " ");
         }
+        //System.out.println();
     }
 
     public void EvaluateFitnessBestTask(Task[] tasks) {

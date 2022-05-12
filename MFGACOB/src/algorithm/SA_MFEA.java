@@ -80,6 +80,7 @@ public class SA_MFEA {
 
         while (generation < Settings.MFEA_GENERATION) {
             generation++;
+            System.out.println("generation: " + generation);
             ArrayList<Individual> offspringPopulation = Reproduction(population);
             population.population.addAll(offspringPopulation);
             population.UpdateRank();
@@ -136,7 +137,7 @@ public class SA_MFEA {
         while (offspringPop.size() < population.popSize) {
             //Lấy ngẫu nhiên 2 cha mẹ trong quần thể (ko trùng)
             int a = randList.get(random.nextInt(population.popSize / 2));
-            int b = randList.get(random.nextInt(population.popSize / 2) + population.popSize);
+            int b = randList.get(random.nextInt(population.popSize / 2) + population.popSize/2);
             Individual parent1 = population.population.get(a);
             Individual parent2 = population.population.get(b);
             ArrayList<Individual> offspring; //List cá thể con đc sinh ra từ 2 cha mẹ

@@ -55,18 +55,28 @@ public class NormalAnt extends Ant{
             //Nếu không tìm được cạnh ứng cử viên => add chuỗi miền hiện tại vào blacklist của node đang xét
             if (candidateEdges.isEmpty()) {
                 task.nodeList.get(cur-1).AddToBlacklist(visitedDomains);
+                //System.out.println("Tập ứng cử viên = rỗng");
                 return null;
             }
             else {
                 Edge visitingEdge;
                 if (candidateEdges.size() == 1) {
                     visitingEdge = candidateEdges.get(0);
+                    //System.out.println("Tập ứng cử viên = 1");
                 }
                 else {
                     for (Edge cEdge : candidateEdges) {
                         pe = Math.pow(cEdge.pheromone, Settings.ALPHA) *
-                            Math.pow((1/(double) cEdge.weight), Settings.BETA) *
+                            Math.pow((1.0/(double) cEdge.weight), Settings.BETA) *
                             Math.pow(chromosome[cEdge.domain-1], Settings.GAMMA);
+                        if (pe == 0) {
+                            System.out.println("================pe bang 0============= " + 
+                            Math.pow(cEdge.pheromone, Settings.ALPHA) + " " + 
+                            Math.pow((1.0/(double) (cEdge.weight + Settings.C)), Settings.BETA) + " " +
+                            Math.pow(chromosome[cEdge.domain-1], Settings.GAMMA) + " " +
+                            cEdge.pheromone + " " + 1.0/(double) cEdge.weight + " " + chromosome[cEdge.domain-1]
+                            );
+                        }
                         peList.add(pe);
                     }
                     //Dùng Roulette chọn 1 cạnh để thăm

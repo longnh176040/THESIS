@@ -69,7 +69,7 @@ public class DullAnt extends Ant{
                 else {
                     for (Edge cEdge : candidateEdges) {
                         //Tính xác suất đi vào 1 cạnh chỉ dựa trên trọng số
-                        pe = (1/(double) cEdge.weight);
+                        pe = (1/(double) (cEdge.weight + Settings.C));
                         peList.add(pe);
                     }
                     //Dùng Roulette chọn 1 cạnh để thăm

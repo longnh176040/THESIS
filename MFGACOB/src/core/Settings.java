@@ -20,15 +20,16 @@ public class Settings {
 	public static final int BETA = 5;
 	public static final int GAMMA = 5;
 	public static final double Q = 5;
+    public static final double C = 5; //Trọng số thêm vào cạnh
 
     //=============SA-MFEA params=============
     public static final int MFEA_GENERATION = 20; 
     public static final int MFEA_POPULATION_SIZE = 25;
 
     public static final int HISTORICAL_MEMORY_SIZE = 30;
-
     
     //=============REPRODUCTION params=============
     public static final int SBX_nc = 2;
+    public static final double SBX_MIN_LIMIT = 0.00001;
     public static final int PM_nm = 2;
 }

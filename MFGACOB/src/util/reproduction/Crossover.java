@@ -27,13 +27,13 @@ public class Crossover {
 
         for (int i = 0; i < betas.length; i++) {
             double v = 0.5*((1+betas[i]) * parent1.chromosome[i] + (1-betas[i]) * parent2.chromosome[i]);
-            if(v > 1) v = 1;
-            else if(v < 0) v = 0;
+            if(v > 1) v = 1 - Settings.SBX_MIN_LIMIT;
+            else if(v < 0) v = Settings.SBX_MIN_LIMIT;
             child1.chromosome[i]= v;
             
             double v2 = 0.5*((1-betas[i]) * parent1.chromosome[i] + (1+betas[i]) * parent2.chromosome[i]);
-            if(v2>1) v2= 1;
-            else if(v2<0) v2= 0;
+            if(v2>1) v2= 1 - Settings.SBX_MIN_LIMIT;
+            else if(v2<0) v2= Settings.SBX_MIN_LIMIT;
             child2.chromosome[i]= v2;
         }
         offspring.add(child1);

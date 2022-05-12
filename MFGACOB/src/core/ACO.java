@@ -3,6 +3,11 @@ package core;
 public class ACO {
 
     public int AntFindingPath(Task task, double[] chromosome) {
+        // for (int j = 0; j < chromosome.length; j++) {
+        //     System.out.print(chromosome[j] + " ");
+        // }
+        // System.out.println();
+
         Path localBestPath = new Path();
 
         int genACO = Settings.ANT_GENERATION;
