@@ -25,7 +25,10 @@ public class Population {
         for (int i = 0; i < this.popSize; i++) {
             Individual individual = new Individual(taskNum, chromosomeLength);
             individual.RandomInit();
-            individual.EvaluateFitnessAllTasks(tasks);
+            int skill_factor = 1 + i % taskNum;
+            individual.skill_factor = skill_factor;
+            individual.EvaluateFitnessBestTask(tasks);
+            //individual.EvaluateFitnessAllTasks(tasks);
             population.add(individual);
         }
     }
@@ -37,9 +40,7 @@ public class Population {
             Collections.sort(population, new Comparator<Individual>() {
                 @Override
                 public int compare(Individual o1, Individual o2) {
-                    if (o1.fitness[t-1] < o2.fitness[t-1]) return -1;
-                    else if (o1.fitness[t-1] > o2.fitness[t-1]) return 1;
-                    return 0;
+                    return -Double.valueOf(o1.fitness[t-1]).compareTo(o2.fitness[t-1]);
                 }
             });
             //Cập nhật ranking của các cá thể ứng với tác vụ đang xét
@@ -47,26 +48,30 @@ public class Population {
                 population.get(i).rank[task-1] = i;
             }
         }
+
+        // for (Individual indiv: population) {
+        //     System.out.println(indiv.rank[0] + " " + indiv.rank[1] + " " + indiv.fitness[0] + "\t" + indiv.fitness[1]);
+        // }
     }
 
     public void UpdateScalarFitness() {
         for (Individual individual : population) {
             int minRank = Integer.MAX_VALUE;
-            int bestTask = 0;
+            // int bestTask = 0;
             //Tìm kiếm tác vụ có rank cao nhất
             for (int task = 1; task <= tasks.length; task++) {
                 if (minRank > individual.rank[task-1]) {
                     minRank = individual.rank[task-1];
-                    bestTask = task;
+                    // bestTask = task;
                 }
                 //Nếu rank của cả 2 tác vụ bằng nhau, random 1 trong 2
-                else if (minRank == individual.rank[task-1]) {
-                    if (Settings.random.nextDouble() < 0.5f) {
-                        bestTask = task;
-                    }
-                }
+                // else if (minRank == individual.rank[task-1]) {
+                //     if (Settings.random.nextDouble() < 0.5f) {
+                //         bestTask = task;
+                //     }
+                // }
             }
-            individual.skill_factor = bestTask;
+            // individual.skill_factor = bestTask;
             individual.scalar_fitness = (1.0/(minRank+1));
         }
     }
@@ -76,9 +81,7 @@ public class Population {
         Collections.sort(population, new Comparator<Individual>() {
             @Override
             public int compare(Individual o1, Individual o2) {
-                if(o1.scalar_fitness < o2.scalar_fitness) return -1;
-                else if(o1.scalar_fitness > o2.scalar_fitness) return 1;
-                else return 0;
+                return -Double.valueOf(o1.scalar_fitness).compareTo(o2.scalar_fitness);
             }
         });
 
@@ -87,6 +90,10 @@ public class Population {
         //Giữ lại số cá thể = kích thước quần thể
         if(population.size()> Settings.MFEA_POPULATION_SIZE) 
             population.subList(Settings.MFEA_POPULATION_SIZE, size).clear();  
+
+        // for (Individual indiv: this.population) {
+        //     System.out.println(indiv.scalar_fitness);
+        // }
     }
 
     public void SwapIndividuals(Individual i1, Individual i2) {

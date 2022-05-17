@@ -28,7 +28,8 @@ public class NormalAnt extends Ant{
             peList.clear();
 
             //Thêm node đang thăm vào ds node đã thăm
-            visitedDomains.add(cur);
+            
+            visitedNodes.add(cur - 1);
 
             //Tìm kiếm tập cạnh ứng cử viên
             for (ArrayList<Edge> outNode : task.nodeList.get(cur - 1).outNodeList) {
@@ -37,6 +38,7 @@ public class NormalAnt extends Ant{
                 visitedNodes.contains(task.nodeList.get(cur - 1).outNodeList.indexOf(outNode))) {
                     continue;
                 }
+                //System.out.println("check visited nodes " + task.nodeList.get(cur - 1).outNodeList.indexOf(outNode));
 
                 for (Edge e : outNode) {
                     //Bỏ qua những cạnh có miền đã thăm
@@ -54,7 +56,9 @@ public class NormalAnt extends Ant{
 
             //Nếu không tìm được cạnh ứng cử viên => add chuỗi miền hiện tại vào blacklist của node đang xét
             if (candidateEdges.isEmpty()) {
-                task.nodeList.get(cur-1).AddToBlacklist(visitedDomains);
+                if (visitedDomains.size() > 0) {
+                    task.nodeList.get(cur-1).AddToBlacklist(visitedDomains);
+                }
                 //System.out.println("Tập ứng cử viên = rỗng");
                 return null;
             }
@@ -69,18 +73,19 @@ public class NormalAnt extends Ant{
                         pe = Math.pow(cEdge.pheromone, Settings.ALPHA) *
                             Math.pow((1.0/(double) cEdge.weight), Settings.BETA) *
                             Math.pow(chromosome[cEdge.domain-1], Settings.GAMMA);
-                        if (pe == 0) {
-                            System.out.println("================pe bang 0============= " + 
-                            Math.pow(cEdge.pheromone, Settings.ALPHA) + " " + 
-                            Math.pow((1.0/(double) (cEdge.weight + Settings.C)), Settings.BETA) + " " +
-                            Math.pow(chromosome[cEdge.domain-1], Settings.GAMMA) + " " +
-                            cEdge.pheromone + " " + 1.0/(double) cEdge.weight + " " + chromosome[cEdge.domain-1]
-                            );
-                        }
+                        // if (pe == 0) {
+                        //     System.out.println("================pe bang 0============= " + 
+                        //     Math.pow(cEdge.pheromone, Settings.ALPHA) + " " + 
+                        //     Math.pow((1.0/(double) (cEdge.weight + Settings.C)), Settings.BETA) + " " +
+                        //     Math.pow(chromosome[cEdge.domain-1], Settings.GAMMA) + " " +
+                        //     cEdge.pheromone + " " + 1.0/(double) cEdge.weight + " " + chromosome[cEdge.domain-1]
+                        //     );
+                        // }
                         peList.add(pe);
                     }
                     //Dùng Roulette chọn 1 cạnh để thăm
                     visitingEdge = RouletteWheel.RouletteSelection(candidateEdges, peList);
+                    //System.out.println("Picked an edge " + visitingEdge.inNode + " " + visitingEdge.outNode);
                 }
                 
                 //Thăm cạnh vừa chọn vào đường đi, cập nhật các thông số

@@ -23,7 +23,7 @@ public class DullAnt extends Ant{
         int c = 0;  //The cost took from start node to current node;
         int cur = task.sourceNode; //The current visiting node;
         int t = task.targetNode;
-
+        
         double pe; //transition probability function of edge e
         ArrayList<Double> peList = new ArrayList<Double>(); //list of transition probability function of candidate edges
 
@@ -32,7 +32,7 @@ public class DullAnt extends Ant{
             peList.clear();
 
             //Thêm node đang thăm vào ds node đã thăm
-            visitedDomains.add(cur);
+            visitedNodes.add(cur - 1);
 
             //Tìm kiếm tập cạnh ứng cử viên
             for (ArrayList<Edge> outNode : task.nodeList.get(cur - 1).outNodeList) {
@@ -58,7 +58,9 @@ public class DullAnt extends Ant{
 
             //Nếu không tìm được cạnh ứng cử viên => add chuỗi miền hiện tại vào blacklist của node đang xét
             if (candidateEdges.isEmpty()) {
-                task.nodeList.get(cur-1).AddToBlacklist(visitedDomains);
+                if (visitedDomains.size() > 0) {
+                    task.nodeList.get(cur-1).AddToBlacklist(visitedDomains);
+                }
                 return null;
             }
             else {

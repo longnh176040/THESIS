@@ -20,17 +20,19 @@ public class ACO {
 
         while (genACO > 0) {
             while (numAnt > 0) {
+                //System.out.println("Run here");
                 rand = Settings.random.nextDouble();
 
                 //Ngẫu nhiên sử dụng kiến thường hoặc kiến điếc mùi
                 if ((rand < Settings.DULL_ANT_RATE || numNormalAnt <= 0) && numDullAnt > 0)
                 {
+                    //System.out.println("Inside dull ant");
                     DullAnt dullAnt = new DullAnt();
                     curPath = dullAnt.FindingEDUPath(task, chromosome, localBestPath);
-    
                     numDullAnt--;
                 }
                 else {
+                    //System.out.println("Inside normal ant");
                     NormalAnt normalAnt = new NormalAnt();
                     curPath = normalAnt.FindingEDUPath(task, chromosome, localBestPath);
                     numNormalAnt--;
@@ -41,8 +43,10 @@ public class ACO {
                     localBestPath.CopyPath(curPath);
                 }
                 numAnt--;
+                //System.out.println("After run there");
             }
-    
+            //System.out.println("num dull ant " + numDullAnt + " num norm ant " + numNormalAnt + " num Ant " + numAnt);
+
             UpdatePheromone(task);
             genACO--;
         }

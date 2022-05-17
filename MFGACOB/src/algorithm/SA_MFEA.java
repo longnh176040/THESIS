@@ -62,6 +62,13 @@ public class SA_MFEA {
         //Khởi tạo quần thể đầu tiên
         Population population = new Population(tasks, popSize);
         population.InitPopulation();
+
+        // for (Individual indiv: population.population) {
+        //     if (indiv.skill_factor == 1) {
+        //         System.out.println(indiv.fitness[0]);
+        //     }
+        // }
+
         population.UpdateRank();
         population.UpdateScalarFitness();
         population.Selection();
@@ -80,9 +87,11 @@ public class SA_MFEA {
 
         while (generation < Settings.MFEA_GENERATION) {
             generation++;
-            System.out.println("generation: " + generation);
+
+            System.out.println("===============generation: " + generation + "=================");
             ArrayList<Individual> offspringPopulation = Reproduction(population);
             population.population.addAll(offspringPopulation);
+            //System.out.println("pop_size: " + population.population.size());
             population.UpdateRank();
             population.UpdateScalarFitness();
             population.Selection();
@@ -99,6 +108,10 @@ public class SA_MFEA {
                     }
                 }
             }
+
+            System.out.println("Best individual " + population.population.get(0).cost[population.population.get(0).skill_factor-1]);
+            System.out.println("Best individual " + population.population.get(1).cost[population.population.get(1).skill_factor-1]);
+
         }
         System.out.println("Seed " + seed);
         for (int i = 1; i <= tasks.length; i++) {
