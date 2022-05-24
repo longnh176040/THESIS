@@ -8,16 +8,23 @@ import algorithm.SA_MFEA;
 import core.Settings;
 import core.Task;
 import util.io.DataIO_EDU;
+import util.io.DataIO_NDU;
 
 public class Main {
     public static Scanner scanner;
 
-    
     public static void main(String[] args) throws Exception {
         try {
-            File directory = new File("data\\IDPC-EDU-data\\test");
-            Task[] tasks = DataIO_EDU.ReadFolder(directory);
-            
+            File f1 = new File("data\\IDPC-NDU-data\\set 2\\set2-S\\idpc_ndu_102_10_834.txt");
+            Task t1 = DataIO_NDU.TaskInit(f1);
+            File f2 = new File("data\\IDPC-EDU-data\\set1\\idpc_10x10x1000.idpc");
+            Task t2 = DataIO_EDU.TaskInit(f2);
+            // DataIO_NDU.PrintTask(t);
+
+            //File directory = new File("data\\IDPC-EDU-data\\test");
+            //Task[] tasks = DataIO_EDU.ReadFolder(directory);
+            Task[] tasks = new Task[2];
+            tasks[0] = t1; tasks[1] = t2;
             // for (Task task : tasks) {
             //     DataIO_EDU.PrintTask(task);
             // }

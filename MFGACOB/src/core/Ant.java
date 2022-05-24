@@ -6,6 +6,8 @@ import java.util.Collections;
 public abstract class Ant {
     public abstract Path FindingEDUPath(Task task, double[] gene, Path localBestPath);
 
+    public abstract Path FindingNDUPath(Task task, double[] gene, Path localBestPath);
+
     /*
     true nếu cạnh đang xét không vượt quá localBestPath
     */

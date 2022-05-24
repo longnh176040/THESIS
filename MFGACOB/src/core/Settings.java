@@ -9,7 +9,7 @@ public class Settings {
     //=============ACO params=============
     public static final int ANT_GENERATION = 5;
     public static final int ANT_POPULATION_SIZE = 20;
-    public static final float DULL_ANT_RATE = 0.2f;
+    public static final float DULL_ANT_RATE = 0.05f;
 
     public static final double INIT_PHEROMONE = 0.00001;
     public static final double EVAPORATE_RATE = 0.05;

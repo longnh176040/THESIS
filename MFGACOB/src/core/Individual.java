@@ -65,7 +65,12 @@ public class Individual {
 
             ACO tACO = new ACO();
             tACO.UpdatePheromone(tasks[i]);
-            this.cost[i] = tACO.AntFindingPath(tasks[i], tChromosome);
+
+            if (tasks[i].isEDU) {
+                this.cost[i] = tACO.AntFindingEDUPath(tasks[i], tChromosome);
+            } else {
+                this.cost[i] = tACO.AntFindingNDUPath(tasks[i], tChromosome);
+            }
             //System.out.print(this.cost[i] + " ");
             this.fitness[i] = 1/ (double) this.cost[i];
             //System.out.print(this.fitness[i] + " ");
@@ -87,7 +92,11 @@ public class Individual {
 
                 ACO tACO = new ACO();
                 tACO.UpdatePheromone(tasks[i]);
-                this.cost[i] = tACO.AntFindingPath(tasks[i], tChromosome);
+                if (tasks[i].isEDU) {
+                    this.cost[i] = tACO.AntFindingEDUPath(tasks[i], tChromosome);
+                } else {
+                    this.cost[i] = tACO.AntFindingNDUPath(tasks[i], tChromosome);
+                }
 
                 // this.cost[i] =  Math.abs(Settings.random.nextInt());
             }
