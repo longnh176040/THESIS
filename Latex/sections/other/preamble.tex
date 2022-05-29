@@ -1,0 +1,62 @@
+\newtcbox{\instructorsign}[1][]
+{
+	enhanced, frame hidden, colback=white, borderline north={0.5pt}{0pt}{black}, top=0pt, left=-10pt, right=45pt, before={\vspace{1em}}, #1
+}
+
+%chapter_format
+
+\renewcommand{\thechapter}{ \arabic{chapter}}
+
+\titleformat{\chapter}[block]
+{\normalfont\bfseries\centering}{CHƯƠNG \thechapter.}{1ex}
+{\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{0pt}{12pt}
+
+%section_format
+\titleformat{\section}[block]
+{\normalfont\bfseries}{\thesection}{1ex}
+{}
+\titlespacing*{\section}{-10pt}{6pt}{6pt}
+
+%\input{list_of_abbreviations}
+
+%subsection_format
+\titleformat{\subsection}[block]
+{\normalfont\bfseries}{\thesubsection}{1ex}
+{}
+\titlespacing*{\subsection}{-5pt}{6pt}{6pt}
+
+%subsubsection_format
+\titleformat{\subsubsection}[block]
+{\normalfont\bfseries}{\thesubsection}{1ex}
+{}
+\titlespacing*{\subsubsection}{0pt}{6pt}{6pt}
+
+%line_spacing
+\renewcommand{\baselinestretch}{1.2}
+
+\titlecontents{chapter}
+[0pt]
+{\addvspace{1em}}
+{\bfseries\thecontentslabel\,}
+{\bfseries}
+{\bfseries\hfill\contentspage}
+
+\Crefname{Figure}{Hình}{Hình}
+\crefname{figure}{hình}{hình}
+\Crefname{Table}{Bảng}{Bảng}
+\crefname{table}{bảng}{bảng}
+\Crefname{Equation}{Phương trình}{Phương trình}
+\crefname{equation}{phương trình}{phương trình}
+
+\Crefname{Chapter}{Chương}{Chương}
+\crefname{chapter}{chương}{chương}
+\Crefname{Section}{Phần}{Phần}
+\crefname{section}{phần}{phần}
+
+\creflabelformat{equation}{#2#1#3}
+\floatname{algorithm}{Thuật toán}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+%	Danh sách từ viết tắt
+%\input{glossaries}
