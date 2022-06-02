@@ -1,1 +1,22 @@
-\acrfull{aco}, which is a population-based metaheuristic and suitable for solving discrete optimization problems, was first proposed by Dorigo and others [12] in the year 1996. Unlike natural ants, as an optimization tool, each of the artificial ants in the \gls{aco} is equipped with exceptional features. Ant chooses its path based on probability, which is proportional to the pheromone concentration and inversely proportional to the path's cost. To avoiding roaming, the ant saves its journey in the memory. When it reaches the destination, the ant updates a corresponding quantity of pheromone on each traversed path. Algorithm 1 outlines the skeleton of the \gls{as} algorithm, which is the first one pertaining to \gls{aco} classes proposed.
+\acrfull{aco}, which is a population-based metaheuristic and suitable for solving discrete optimization problems, was first proposed by Dorigo~\textit{et al.}~\cite{dorigo1996ant} in the year 1996. Unlike natural ants, as an optimization tool, each of the artificial ants in the \gls{aco} is equipped with exceptional features. Ant chooses its path based on probability, which is proportional to the pheromone concentration and inversely proportional to the path's cost. To avoiding roaming, the ant saves its journey in the memory. When it reaches the destination, the ant updates a corresponding quantity of pheromone on each traversed path. Algorithm~\ref{alg:as} outlines the skeleton of the \gls{as} algorithm, which is the first one pertaining to \gls{aco} classes proposed.
+
+\begin{algorithm}
+	\caption{The pseudocode of \gls{as}}
+	\label{alg:as}
+	\Begin
+	{	
+		Initialize\;
+		
+		$t \leftarrow 1$\;
+		\While{terminate conditions are not satisfied} 
+		{
+			
+		}
+	}
+\end{algorithm}
+
+Initially, the trail intensity on all routes was initialized equal and regularly with a small value. Subsequently, the algorithm iterates itself until it accomplishes the termination criteria. This process consists of the following sequential stages: In the first stage, the ants start from their nest and find their way. To travel from $i$ to $j$, the $k^{th}$ ant must choose an edge in the  through a transition probability function:
+\begin{equation}
+	\label{eq:aco_transition}
+	p^k_{ij} =  
+\end{equation}
