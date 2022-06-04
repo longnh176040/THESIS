@@ -1,0 +1,34 @@
+\subsubsection{Crossover}
+Since the proposed encoding utilizes an array of real numbers, this thesis apply the \gls{sbx}~\cite{deb1995simulated}. \gls{sbx} has been applied in many real-coded \gls{ga} problems and it also has proven to be effective. The implementation steps of \gls{sbx} can be summarized as follows. Firstly, choose a random number $u = [ \, 0, 1) \,$. Next, the ratio of the difference in offspring values to their parents' values $\beta$ is calculated as:
+\begin{equation}
+	\beta = 
+	\begin{cases}
+		(2u)^{\frac{1}{\eta_c + 1}}, & \text{if $u \leq 0.5$},\\
+		(\frac{1}{2(1 - u)})^{\frac{1}{\eta_c + 1}}, & \text{otherwise},
+	\end{cases}  
+\end{equation}
+where $\eta_c$ is any non-negative real number indicating the distribution index. A large value of $\eta_c$ increases the likelihood of generating near-parent solutions, whereas a small one allows for the selection of distant solutions as children. Finally, for two parents $p_1$ and $p_2$, two offspring $o_1$ and $o_2$ are reproduced using:
+\begin{equation}
+	o^i_1 = 0.5*[(1-\beta)*p^i_1 + (1+\beta)*p^i_2],
+\end{equation}
+\begin{equation}
+	o^i_2 = 0.5*[(1+\beta)*p^i_1 + (1-\beta)*p^i_2].
+\end{equation}
+
+\subsubsection{Mutation}
+In like manner, this thesis use \gls{pm}~\cite{deb2014analysing}, which is also an operator used in real-coded \gls{ga}. From a selected parent $p$, the \gls{pm} produces an individual $p'$ as follows. Similar to \gls{sbx}, a random number $u = 	[ \, 0, 1) \,$ is picked at first. For each element $p_i$, the $\delta_i$ is calculated as:
+\begin{equation}
+	\delta_i = 
+	\begin{cases}
+		(2u)^{\frac{1}{\eta_m + 1}} - 1, & \text{if $u \leq 0.5$},\\
+		1 - [2(1-u)]^{\frac{1}{\eta_m + 1}}, & \text{otherwise},
+	\end{cases}
+\end{equation}
+where $\eta_m$ is any non-negative real number indicating the polynomial distribution index. The perturbance can be varied in the mutated solution by changing $\eta_m$ value. $p'$ is then updated using the following equation:
+\begin{equation}
+	p' = 
+	\begin{cases}
+		p + \delta_i * p, & \text{if $u \leq 0.5$},\\
+		p + \delta_i * (1-p), & \text{otherwise},
+	\end{cases}
+\end{equation}
