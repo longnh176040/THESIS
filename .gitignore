@@ -23,7 +23,7 @@
 hs_err_pid*
 
 ## pdf files
-*.pdf
+main.pdf
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
