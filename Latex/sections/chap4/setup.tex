@@ -1,0 +1,27 @@
+To reveal the strengths and weaknesses of \acrshort{gaco}, this paper adopted the \gls{mfea} proposed in~\cite{binh2020multifactorial}, named \acrshort{mfea-edu}, and an \gls{saco} algorithm introduced in~\cite{sudholt2012simple}, as comparison algorithms. The efficiency of this multitasking algorithm compared to single-tasking one had been confirmed experimentally. Thus, we reuse the same parameters as in the original paper to create a similar experimental environment, thereby maximizing the performance of \acrshort{mfea-edu}. 
+For \acrshort{saco}, its parameters are also used as in the original study, except for $\alpha,~\beta,$ and $Q$, which are taken from the \gls{aco} level in \acrshort{gaco}.
+Turning to the proposed algorithm, based on preliminary experiments, we observed that a parameter set used for the \gls{aco} level achieved the best performance on the dataset. Thus, it is employed in the following experiments. Table~\ref{tab:paramGACO} shows all parameters used in \acrshort{gaco}.
+
+Besides, each algorithm was simulated 30 times on the same computer (Intel Core i7 - 3.60GHz, 16GB RAM) with the total number of task evaluations is 50000. The source codes were installed in Java language.
+\begin{table}[H]
+	\centering
+	\caption{The parameter set used for \acrshort{gaco}}
+	\scalebox{1}{
+		\begin{tabular}{clc}
+			\toprule
+			& \multicolumn{1}{c}{\textbf{Parameter Name}} & \multicolumn{1}{c}{\textbf{Parameter Value}}\\
+			\midrule
+			\parbox[t]{2mm}{\multirow{4}{*}{\rotatebox[origin=c]{90}{\textbf{\gls{ga}}}}} & Population Size ($N$) & 25\\
+			& Number of generations ($GEN\_GA$) & 20\\
+			& Crossover Rate (pc) & 0.5\\
+			& Mutation Rate (pm) & 0.05\\
+			\midrule
+			\parbox[t]{2mm}{\multirow{4}{*}{\rotatebox[origin=c]{90}{\textbf{\gls{aco}}}}} & Population Size ($M$) & 20\\
+			& Number of $dull~ants$ & M*20$\% $ \\
+			& Number of generations ($GEN\_ACO$) & 5\\
+			& $\alpha,~\beta,~\gamma,~Q$ & 3, 5, 5, 5\\
+			\bottomrule
+		\end{tabular}
+	}
+	\label{tab:paramGACO}
+\end{table}

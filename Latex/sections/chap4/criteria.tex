@@ -1,0 +1,29 @@
+Table~\ref{tab:criteria} lists the criteria for evaluating the quality of the algorithms.
+\begin{table}[htbp]
+	\centering
+	\caption{Criteria for evaluating the quality of algorithms}
+	\scalebox{1}{
+		\begin{tabular}{ll}
+			\toprule
+			AVG & The average function value over all runs \\
+			BF & The best function value found over all runs\\
+			STD & Standard Deviation \\
+			RPD & Relative Percentage Differences\\
+			PI & Improvement Percentage  \\
+			\bottomrule
+		\end{tabular}
+	}
+	\label{tab:criteria}
+\end{table}
+
+Let $S^i_{ar}$ be the solution provided by the considered algorithm $a$, for instance $i$, on the $r$-th run. Let $B^i$ be the best solution obtained among all algorithms for $i$. For minimization problems, the \gls{rpd} is calculated using Equation~\ref{equa:rpd}. The smaller the \gls{rpd} value, the better the quality of the solution found.
+\begin{equation}
+	\label{equa:rpd}
+	{RPD}^i_{ar} = \frac{S^i_{ar} - B^i}{B^i} \times 100
+\end{equation}
+
+The \gls{pi} is also often used to compare two algorithms $a$ and $b$. Let $AVG^i_a$ and $AVG^i_b$ be the average function values given by $a$ and $b$ on $i$, respectively. The \gls{pi} of $a$ compared to $b$ on $i$ is then computed as Equation~\ref{equa:pi}. On the other hand, the greater the \gls{pi}, the larger the considered algorithm's improvement.
+\begin{equation}
+	\label{equa:pi}
+	{PI}^i_{ab} = \frac{{AVG}^i_a - {AVG}^i_b}{{AVG}^i_b} \times 100
+\end{equation}
