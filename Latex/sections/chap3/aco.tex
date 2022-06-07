@@ -58,6 +58,15 @@ Typically, traditional \gls{aco} approaches have a potential drawback of prematu
 \subsubsection{Checksum}
 To ease the search for each ant, a second component is employed, coined $Checksum$. Before choosing an edge $e$, ant $k$ will sum its current path length and the weight of $e$. If this sum is greater than the currently found best solution, $e$ is removed from the candidate edge set. Checksum not only expedites the ant's search process but also ensures that the solution located will always be better than the previous one.
 
+\setlength{\intextsep}{3pt}
+\renewcommand{\scalefigure}{1.1}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=\scalefigure]{Figures/chap 3/CheckSum.pdf}
+	\caption{An example of an ant checking the Checksum}
+	\label{fig:checksum}
+\end{figure}
+
 \subsubsection{Blacklist of Domains on each Node}
 One problem encountered when applying \gls{aco} to incomplete graphs is that ant gets stuck at a specific node since there is no subsequent path. Moreover, this phenomenon transpires more frequently in \gls{idpcdu}, where ant not only finds a path, but the path must also fulfill the \gls{du} constraint. In other words, a domain sequence is deemed to be stuck when an ant is unable to find any edges satisfying the \gls{du} constraint leading to one of the subsequent nodes. To remedy this shortcoming, an anti-stuck strategy for multi-domain problems like \gls{idpcdu} is proposed as follows. Except for the source and destination, every time an ant arrives at a stuck node, its list of visited domains is stored in the node's blacklist. Before deciding an edge $e$, the ant checks if the edge's domain $d$ is the one that causes a stuck of any sequence of domains in the blacklist of the node to which it leads. In such a case, the ant will continue to scan whether its list of visited domains is a superset of the other after discarding $d$. Consequently, $d$ will be removed from the candidate edge set if this point is satisfied. Algorithm~\ref{alg:blacklist} presents how to check if a list of domains is in the blacklist of any node. Note that before being saved to the blacklist as well as when the ant performs the $Domain~Blacklist~Check$, the domains will be sorted in a particular predefined order. Thus, the retrieval of data is performed faster, saving both time and resources.
 
@@ -89,7 +98,7 @@ One problem encountered when applying \gls{aco} to incomplete graphs is that ant
 \end{algorithm}
 
 \setlength{\intextsep}{3pt}
-\renewcommand{\scalefigure}{0.9}
+\renewcommand{\scalefigure}{1}
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=\scalefigure]{Figures/chap 3/BlacklistV2.pdf}

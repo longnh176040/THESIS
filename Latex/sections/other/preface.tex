@@ -1,10 +1,23 @@
-....
+Researching into graph problems has long attracted significant interest from the science community since numerous real-world problems can be modeled as graphs, such as transport services, logistics, and agricultural irrigation systems. Especially to meet the current surge in Internet usage, network optimization problems are typically prioritized to be solved. Stems from this practical the \gls{idpcdu}, which concentrates on handling the routing problem on multi-domain networks. 
+
+\gls{idpcdu} takes the context of the \gls{hpce} architecture, in which a parent \gls{pce} performs inter-domain path computation based on the gathered intra-domain routing information from its children PCEs~\cite{paolucci2013survey}. By integrating the optimal order of crossed domains with path computation, the \gls{hpce} can effortlessly achieve the packet's route optimality. However, as the number of domains grows, this architecture is regarded as infeasible due to the existence of two bottlenecks, namely the parent \gls{pce}'s processing capabilities and the capacity of the Children-to-Parent \gls{pce} communication channel~\cite{king2012application}. \gls{idpcdu} thus introduces a viable condition, called the \gls{du}, to overcome the inherent problem of packet processing delays in \gls{hpce} when being applied to large-scale networks, that is, preventing a path from visiting a domain more than once. In particular, each path found by \gls{idpcdu} must be the shortest one between two fixed nodes, possibly belong to the same or different network domains, and satisfy the above constraint. Consequently, \gls{idpcdu} has been proven to be in the NP-Complete class~\cite{maggi2018domain}. 
+
+In light of \gls{idpcdu}'s complexity, metaheuristic algorithms are proper techniques to tackle this problem. \gls{ga} and \gls{aco} are some example algorithms that fall under this class. \gls{ga} is based on Darwin's Theory of Evolution, which holds that the better individuals are able to adapt to their surroundings, the better their chances of surviving and passing their traits to future generations. On the other hand, \gls{aco} simulates the natural foraging process of ants.
+
+Accordingly, there have been several proposals to solve \gls{idpcdu} in the literature. However, these previous approaches are deemed ineffective because they often use only a single metaheuristic algorithm while the search space is massive with a considerable number of edges. For this reason, this thesis introduces a two-level strategy that combines the advantages of both \gls{ga} and \gls{aco} for \gls{idpcdu}. Particularly, the upper-level \gls{ga} plays the role of navigating the path for ants at the lower one. In addition, an anti-stuck method is integrated into the improved \gls{aco} algorithm, which helps to address the problem of ant being stuck when applying it to multi-domain network problems. This combination is expected to improve the quality of final solutions compared to the prior techniques.
+
+The major contributions of this thesis can be summarized as follows:
+\begin{itemize}
+	\item Propose a two-level algorithm combining \gls{ga} and an improved \gls{aco} to solve \gls{idpcdu}.
+	\item Devise an anti-stuck strategy for ants when applying \gls{aco} to multi-domain network problems, such as \gls{idpcdu}.
+	\item Conduct experiments on various test instances and comparison with several previous approaches to prove the efficiency of the proposed model.
+\end{itemize}
 
 This thesis consists of 4 chapters as follows:
 \begin{itemize}
-	\item \textbf{Chapter 1} 
-	\item \textbf{Chapter 2} 
-	\item \textbf{Chapter 3} 
-	\item \textbf{Chapter 4} 
+	\item \textbf{Chapter 1:} Overview current popular approximate and approximation algorithms, especially Genetic Algorithm and Ant Colony Optimization.
+	\item \textbf{Chapter 2:} Introduce to the Inter-domain Path Computation problem under the Domain Uniqueness constraint. This chapter also presents the problem statement and its related works.
+	\item \textbf{Chapter 3:} Elaborate on the proposed algorithm, including detailed descriptions of each of its components.
+	\item \textbf{Chapter 4:} Includes the experimental setups, computational results on various test sets, and a performance comparison with other algorithms
 \end{itemize}
 
