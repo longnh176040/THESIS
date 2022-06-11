@@ -1,4 +1,42 @@
 \subsection{Ants’ Foraging Behavior in real life}
+When finding the way, ants exchange information indirectly and operate in a self-organizing manner. Despite its simplicity, this method allows the ants to perform complex tasks that are far beyond the ability of individual ants, especially the one to find the shortest path from their nest to the food source, even though they are unable to measure path length. 
+While moving, ants deposit a chemical called pheromone. Ants can smell the pheromone and they tend to choose paths marked by strong pheromone concentrations. Based on this trait, ants can follow the path to the food source discovered by other ants. Overall, This collective trail-laying and trail-following behavior whereby an ant is influenced by a chemical trail left by other ants is the inspiration of \gls{aco}~\cite{parsons2005ant}.
+
+\setlength{\intextsep}{4pt}
+\renewcommand{\scalefigure}{0.5}
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}{.49\linewidth}
+		\centering
+		\includegraphics[scale=\scalefigure]{Figures/chap 1/Ant Experiment.pdf}
+		\caption{Branches have equal length}
+		\label{fig:aco_exp_1}
+	\end{subfigure}
+	\begin{subfigure}{.49\linewidth}
+		\centering
+		\includegraphics[scale=\scalefigure]{Figures/chap 1/Ant Experiment 2.pdf}
+		\caption{Branches have different length}
+		\label{fig:aco_exp_2}
+	\end{subfigure}
+
+	\begin{subfigure}{.95\linewidth}
+		\centering
+		\includegraphics[scale=\scalefigure]{Figures/chap 1/Ant Experiment 3.pdf}
+		\caption{Only the long branch was setup to the colony at first. After 30 minutes, a new shorter one is added.}
+		\label{fig:aco_exp_3}
+	\end{subfigure}
+	\caption{Experimental setup for the Double bridge experiment.}
+	\label{fig:aco_exp}
+\end{figure}
+
+%\setlength{\intextsep}{3pt}
+%\renewcommand{\scalefigure}{0.5}
+%\begin{figure}[htbp]
+%	\centering
+%	\includegraphics[scale=\scalefigure]{Figures/chap 1/Ant Experiment 3.pdf}
+%	\caption{Experimental setup for the Double bridge experiment.}
+%	\label{fig:aco_exp_3}
+%\end{figure}
 
 \subsection{General Ant Colony Optimization - Ant System}
 \acrfull{aco}, which is a population-based metaheuristic and suitable for solving discrete optimization problems, was first proposed by Dorigo~\textit{et al.}~\cite{dorigo1996ant} in the year 1996. Unlike natural ants, as an optimization tool, each of the artificial ants in the \gls{aco} is equipped with exceptional features. Ant chooses its path based on probability, which is proportional to the pheromone concentration and inversely proportional to the path's cost. To avoiding roaming, the ant saves its journey in the memory. When it reaches the destination, the ant updates a corresponding quantity of pheromone on each traversed path. Algorithm~\ref{alg:as} outlines the skeleton of the \gls{as} algorithm, which is the first one pertaining to \gls{aco} classes proposed.
