@@ -5,7 +5,7 @@ The performance of \acrshort{gaco} for \gls{idpcdu} is evaluated under three ana
 	\item Analysis quality of the proposed algorithm in comparison with other algorithms.
 \end{itemize}
 
-\subsubsection{ Analysis of the algorithm's computational complexity}
+\subsection{Analysis of the algorithm's computational complexity}
 The number of times \acrshort{gaco} is iterated is denoted by $GEN\_GA$. In each iteration, the execution times of the crossover, mutation, and decoding operators are $N, p_m * N$, and $N$ times, respectively. The complexity of the algorithm is as follows:
 $O($\acrshort{gaco}$)$ = $O($Pre-filtering process$)$ + $O($Initialization$)$ + $GEN\_GA\times \bigg(N \times O($Crossover$)$ + $p_{m}\times N\times O($Mutation$)$ + $N\times O($Evaluation$)$ + $O($Selection$)\bigg)$, in which the complexity of each component is as follows:
 \begin{itemize}
@@ -18,7 +18,7 @@ Therefore, $O($\acrshort{gaco}$) = $
 $O(|E|) + O(|D|\times N)$ + $GEN\_GA\times\bigg(N \times O(|D|) + p_{m}\times N\times O(1) + N\times GEN\_ACO\times (O(|E'|) + M\times (O(|E'|)\times (O(1)+O(|D|^2)))) + N\times O(logN))\bigg)$
 = $O\bigg(GEN\_GA\times N\times (GEN\_ACO\times M\times|E'|\times|D|^2 +logN)\bigg)$.
 
-\subsubsection{Analysis of the obtained results by the Non-parametric statistic}
+\subsection{Analysis of the obtained results by the Non-parametric statistic}
 The Non-parametric statistic is used to compare the effectiveness of the following algorithms: \acrshort{saco}, \acrshort{mfea-edu}, and the proposed \acrshort{gaco}. The process of comparison involves two significant steps:
 \begin{itemize}
 	\item First, statistical approaches such as Friedman, Aligned Friedman, and Quade~\cite{carrasco_recent_2020, derrac_practical_2011} are used to evaluate the differences among results obtained by the above algorithms.
@@ -98,7 +98,7 @@ Table~\ref{tab:Results_Rank} also point out that the \acrshort{gaco} has the sma
 	\label{fig:rpd}
 \end{figure}
 
-\subsubsection{Analysis quality of the proposed algorithm in comparison with other algorithms}
+\subsection{Analysis quality of the proposed algorithm in comparison with other algorithms}
 The experimental results shown in Table~\ref{tab:type_1} and Table~\ref{tab:type_2} have pointed out that \acrshort{gaco} outperforms \acrshort{saco} and \acrshort{mfea-edu} on both the best value, average, and standard deviation in most instances, except small instant Idpc\_10x10x1000. The box and whisker plots of each instance type and the three algorithms (\acrshort{gaco}, \acrshort{mfea-edu}, and \acrshort{saco}) are shown in Figure~\ref{fig:rpd}. Our algorithm finds the best solution every time, which is why the box and whisker plots in Type 1, Type 2, and All Types are reduced to single lines. The average \gls{pi} of \acrshort{gaco} compared to \acrshort{saco}, as shown in Table~\ref{tab:pi}, is 24.6\% in Type 1 and  18.7\% in Type 2. Meanwhile, the percentage for \acrshort{mfea-edu} is 21.0\% in Type 1 and 17.4\% in Type 2. Overall, the proposed \acrshort{gaco} improves \acrshort{mfea-edu}  19.4\% in terms of the average result, and the enormous gap recorded is 44.4\%.
 
 \begin{table}[htbp]

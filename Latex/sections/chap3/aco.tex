@@ -52,10 +52,12 @@ To travel from node $v_i$, the $k^{th}$ ant must choose an edge $e$ in the $Adj(
 	\frac{[\tau_e(t)]^{\alpha} \cdot [\eta_e(t)]^{\beta} \cdot  [P_e(t)]^{\gamma}}{\Sigma_{h \in Adj(v_i)} [\tau_h(t)]^{\alpha} \cdot [\eta_h(t)]^{\beta} \cdot [P_h(t)]^{\gamma}},
 \end{equation}
 
-\subsubsection{Ant Colony Optimization with Dull Ants}
+In addition, to facilitate the ants’ search process and help ants avoid getting stuck, three components are integrated into the proposed \acrshort{gaco}, which will be discussed in the following subsections.
+
+\subsection{Ant Colony Optimization with Dull Ants}
 Typically, traditional \gls{aco} approaches have a potential drawback of premature convergence to a local optimum, often caused by a large amount of pheromone deposited by previous ant generations. Together with minimizing the impact of this phenomenon, a new type of ant, called $dull~ant$~\cite{shimomura2010ant}, is added to the colony. The notable feature of dull ant is that while it can neither trail the pheromone nor perceive the domains' priority, it can still deposit the pheromone. Therefore, dull ants will not be affected by other ants, opening up opportunities to discover alternatively better paths.
 
-\subsubsection{Checksum}
+\subsection{Checksum}
 To ease the search for each ant, a second component is employed, coined $Checksum$. Before choosing an edge $e$, ant $k$ will sum its current path length and the weight of $e$. If this sum is greater than the currently found best solution, $e$ is removed from the candidate edge set. Checksum not only expedites the ant's search process but also ensures that the solution located will always be better than the previous one.
 Figure~\ref{fig:checksum} is a typical example of an ant checking the Checksum. Assume that the currently best solution found is 20 and the current path length of the considered ant is 17, and the \gls{du} are still satisfied.The ant will then sum its path value with each edge leading to the subsequent nodes. Following Checksum, the green edge leading to node 4 will be removed from the candidate edge set since $17 + 4 = 21 > 20$.
 
@@ -68,7 +70,7 @@ Figure~\ref{fig:checksum} is a typical example of an ant checking the Checksum. 
 	\label{fig:checksum}
 \end{figure}
 
-\subsubsection{Blacklist of Domains on each Node}
+\subsection{Blacklist of Domains on each Node}
 One problem encountered when applying \gls{aco} to incomplete graphs is that ant gets stuck at a specific node since there is no subsequent path. Moreover, this phenomenon transpires more frequently in \gls{idpcdu}, where ant not only finds a path, but the path must also fulfill the \gls{du} constraint. In other words, a domain sequence is deemed to be stuck when an ant is unable to find any edges satisfying the \gls{du} constraint leading to one of the subsequent nodes. To remedy this shortcoming, an anti-stuck strategy for multi-domain problems like \gls{idpcdu} is proposed as follows. Except for the source and destination, every time an ant arrives at a stuck node, its list of visited domains is stored in the node's blacklist. Before deciding an edge $e$, the ant checks if the edge's domain $d$ is the one that causes a stuck of any sequence of domains in the blacklist of the node to which it leads. In such a case, the ant will continue to scan whether its list of visited domains is a superset of the other after discarding $d$. Consequently, $d$ will be removed from the candidate edge set if this point is satisfied. Algorithm~\ref{alg:blacklist} presents how to check if a list of domains is in the blacklist of any node. Note that before being saved to the blacklist as well as when the ant performs the $Domain~Blacklist~Check$, the domains will be sorted in a particular predefined order. Thus, the retrieval of data is performed faster, saving both time and resources.
 
 \begin{algorithm}

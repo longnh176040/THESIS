@@ -2,6 +2,14 @@
 When finding the way, ants exchange information indirectly and operate in a self-organizing manner. Despite its simplicity, this method allows the ants to perform complex tasks that are far beyond the ability of individual ants, especially the one to find the shortest path from their nest to the food source, even though they are unable to measure path length. 
 While moving, ants deposit a chemical called pheromone. Ants can smell the pheromone and they tend to choose paths marked by strong pheromone concentrations. Based on this trait, ants can follow the path to the food source discovered by other ants. Overall, This collective trail-laying and trail-following behavior whereby an ant is influenced by a chemical trail left by other ants is the inspiration of \gls{aco}~\cite{parsons2005ant}.
 
+One of the most well-known experiments on ant's pheromone trail-laying and -following behavior is the Double bridge experiment, designed and conducted by Deneubourg~\textit{et al}. The experiment was simply set up with a double bridge placed between the ant nest and the food source (See Figure~\ref{fig:aco_exp}). Besides, the ratio $r = l_l / l_s$ between the length of the two branches of the double bridge is varied, where $l_l$ was the length of the longer branch and $l_s$ the length of the shorter one.
+
+The first experiment is illustrated in Figure~\ref{fig:aco_exp_1}, where the bridge has two equal branches ($r = 1$). At the start, the ants randomly choose a path from the nest to the food source. Over time, all the ants used the same branch. This could be explained by the amount of pheromone spread out over time by the ants. First, the ant will randomly choose one of the two branches because there are no pheromones. Due to random fluctuations, the number of ants on each branch is not equal. A few more ants choose one branch over the other, which means a larger amount of pheromone is deposited in only one branch. This higher concentration of pheromone encourages other ants to pick that branch again, and so on until the ants all converge to one single path.
+
+The second experiment was set up similarly to the first, however, $r = 2$, i.e. the long branch was twice as long as the short one (See Figure~\ref{fig:aco_exp_2}). In this case, the ants that choose the shorter branch will be the first to reach the food source and vice versa. Consequently, the shorter branch will concentrate a larger amount of pheromone, thus biasing the ant's decision in its favor. Therefore, after a while, nearly all the ants chose to use only the short branch. It is interesting to note that not all ants utilize the short branch, with just a tiny fraction opting for the longer one.
+
+Figure~\ref{fig:aco_exp_3} demonstrated the final experiment. Initially, only one long branch was placed between the nest and the food source. After 30 minutes, a new short one is added. As a result, the short branch was picked sporadically and the colony was stuck on the long branch. The reason for this may due to the high pheromone concentration on the long branch and the slow evaporation rate of the pheromone. Because of its high pheromone concentration, the long branch is chosen by the majority of ants, which keeps reinforcing the long branch even when a shorter one arrives. At the same time, the evaporation rate of the pheromone is also too slow for the ants to forget the suboptimal path they have previously converged on so that a new path can hardly be discovered.
+
 \setlength{\intextsep}{4pt}
 \renewcommand{\scalefigure}{0.5}
 \begin{figure}[htbp]
@@ -28,15 +36,6 @@ While moving, ants deposit a chemical called pheromone. Ants can smell the phero
 	\caption{Experimental setup for the Double bridge experiment.}
 	\label{fig:aco_exp}
 \end{figure}
-
-%\setlength{\intextsep}{3pt}
-%\renewcommand{\scalefigure}{0.5}
-%\begin{figure}[htbp]
-%	\centering
-%	\includegraphics[scale=\scalefigure]{Figures/chap 1/Ant Experiment 3.pdf}
-%	\caption{Experimental setup for the Double bridge experiment.}
-%	\label{fig:aco_exp_3}
-%\end{figure}
 
 \subsection{General Ant Colony Optimization - Ant System}
 \acrfull{aco}, which is a population-based metaheuristic and suitable for solving discrete optimization problems, was first proposed by Dorigo~\textit{et al.}~\cite{dorigo1996ant} in the year 1996. Unlike natural ants, as an optimization tool, each of the artificial ants in the \gls{aco} is equipped with exceptional features. Ant chooses its path based on probability, which is proportional to the pheromone concentration and inversely proportional to the path's cost. To avoiding roaming, the ant saves its journey in the memory. When it reaches the destination, the ant updates a corresponding quantity of pheromone on each traversed path. Algorithm~\ref{alg:as} outlines the skeleton of the \gls{as} algorithm, which is the first one pertaining to \gls{aco} classes proposed.
@@ -94,7 +93,7 @@ where $\Delta \tau_{ij}^k$ is the amount of pheromone substance per unit of leng
 
 The best solution is updated if the ant colony finds a better one. \gls{aco} finally returns the best solution when the stop condition is met.
 
-\subsection{Some variants of Ant Colony Optimization}
-\subsubsection{Ant Colony System}
+%\subsection{Some variants of Ant Colony Optimization}
+%\subsubsection{Ant Colony System}
 
-\subsubsection{Max-min Ant System}
+%\subsubsection{Max-min Ant System}
