@@ -1,3 +1,11 @@
+\setlength{\intextsep}{3pt}
+\renewcommand{\scalefigure}{0.4}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=\scalefigure]{Figures/chap 1/evolution-tree.jpg}
+	\label{fig:evolution_tree}
+\end{figure}
+\bigskip
 \acrfull{ga} is one of the most popular representations of \gls{ea}. First proposed by John Holland in 1992~\cite{holland1992genetic}, \gls{ga} has been widely applied to solve a host of complex real-world problems as well as computationally theoretical ones. Inspired by Darwin's Theory of Evolution, the algorithm commences with a population of individuals that undergo reproduction to produce offspring. The procedure iterates itself intending to preserve genetic material, making a population fitter concerning a given environment while eliminating weaker individuals. The optimization of evolution progress guarantees that the next generation is always better than the previous one. Algorithm~\ref{alg:ga} shows the \gls{ga} framework, while details of this algorithm are presented in Subsection~\ref{ga:encoding} to~\ref{ga:terminate} as below.
 
 \begin{algorithm}

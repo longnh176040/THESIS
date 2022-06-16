@@ -1,7 +1,14 @@
 Corresponding to each chromosome, an improved \gls{aco} algorithm that plays the fitness evaluation role as well as finds the shortest path from the source node to the target node is proposed. 
-%In the beginning, the trail intensity on all routes was initialized equally and regularly with a small value. Subsequently, the algorithm iterates itself until it accomplishes the termination criteria. This process consists of the following sequential stages: In the first stage, the ants start from their nest and find their way. 
-
 To travel from node $v_i$, the $k^{th}$ ant must choose an edge $e$ in the $Adj(v_i)$ through a transition probability function (Equation~\ref{equation:edge_pick}).
+\begin{equation}
+	\label{equation:edge_pick}
+	p_e(t) = 
+	\frac{[\tau_e(t)]^{\alpha} \cdot [\eta_e(t)]^{\beta} \cdot  [P_e(t)]^{\gamma}}{\Sigma_{h \in Adj(v_i)} [\tau_h(t)]^{\alpha} \cdot [\eta_h(t)]^{\beta} \cdot [P_h(t)]^{\gamma}},
+\end{equation}
+where $P_e$ is the domain's priority of edge $e$ obtained from the input chromosome, and $\gamma$ is a constant representing the importance of this domain's priority value over the pheromone trail and ant's experience.
+
+As can be seen, the difference between the probability function of the proposed algorithm and Equation~\ref{eq:aco_transition} lies in $P_e$. Based on this value, the ant will be navigated to select edges by their domain priority instead of random probability selection, which makes it difficult to fulfill the \gls{du}.
+The process of an ant finding the destination is described in Algorithm~\ref{alg:apa}.
 
 \begin{algorithm}
 	%\setstretch{0.9}
@@ -44,13 +51,6 @@ To travel from node $v_i$, the $k^{th}$ ant must choose an edge $e$ in the $Adj(
 		\Return $p$ and $c(t)$\;
 	}
 \end{algorithm}
-
-
-\begin{equation}
-	\label{equation:edge_pick}
-	p_e(t) = 
-	\frac{[\tau_e(t)]^{\alpha} \cdot [\eta_e(t)]^{\beta} \cdot  [P_e(t)]^{\gamma}}{\Sigma_{h \in Adj(v_i)} [\tau_h(t)]^{\alpha} \cdot [\eta_h(t)]^{\beta} \cdot [P_h(t)]^{\gamma}},
-\end{equation}
 
 In addition, to facilitate the ants’ search process and help ants avoid getting stuck, three components are integrated into the proposed \acrshort{gaco}, which will be discussed in the following subsections.
 
@@ -99,7 +99,7 @@ One problem encountered when applying \gls{aco} to incomplete graphs is that ant
 		\Return false\;
 	}
 \end{algorithm}
-
+\bigskip
 \setlength{\intextsep}{3pt}
 \renewcommand{\scalefigure}{1}
 \begin{figure}[htbp]
@@ -108,5 +108,5 @@ One problem encountered when applying \gls{aco} to incomplete graphs is that ant
 	\caption{An example of an ant checking the blacklist}
 	\label{fig:blacklist}
 \end{figure}
-
+\bigskip
 Take Figure~\ref{fig:blacklist} as a sample blacklist implementation in ant's route selection. Suppose that the blacklists of all nodes are initially empty, and an edge that goes from node $i$ to $j$ with an associated weight $w$ and belongs to domain $d$ is denoted by $(i, j, w, d)$. The first ant starts from $(s, 1, 1, red)$, $(1, 2, 4, blue)$, $(2, 4, 4, green)$ and gets stuck at node 4 because it can only revisit the $red$ domain. Therefore, the order of domains $(red, blue, green)$ is added to the blacklist of node 4. The next ant has the same beginning as the previous one. When standing at node 2, it realizes that there is only one route $(2, 4, 4, green)$, which also belongs to the domain that caused the stuck at node 4. The ant then resumes checking and finds that its visited domains list is also the stuck list without the $green$ domain. Therefore, the ant will remove this edge from the candidate set and select another. An ant has the following path $(s, 1, 3, blue)$, $(1, 5, 1, red)$, $(5, 2, 2, green)$. When it reaches node 2, it does the same thing as the second ant. In this case, its traversed domains list is a superset of the one after discarding the $green$ domain, and in the end, the edge $(2, 4, 4, green)$ is still eliminated. This strategy allows the searching candidate edge of ant more thoroughly without saving a plethora of stuck cases. The shorter the order of domains in blacklists, the more effective this method will be.

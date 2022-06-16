@@ -39,7 +39,7 @@ Figure~\ref{fig:aco_exp_3} demonstrated the final experiment. Initially, only on
 
 \subsection{General Ant Colony Optimization - Ant System}
 \acrfull{aco}, which is a population-based metaheuristic and suitable for solving discrete optimization problems, was first proposed by Dorigo~\textit{et al.}~\cite{dorigo1996ant} in the year 1996. Unlike natural ants, as an optimization tool, each of the artificial ants in the \gls{aco} is equipped with exceptional features. Ant chooses its path based on probability, which is proportional to the pheromone concentration and inversely proportional to the path's cost. To avoiding roaming, the ant saves its journey in the memory. When it reaches the destination, the ant updates a corresponding quantity of pheromone on each traversed path. Algorithm~\ref{alg:as} outlines the skeleton of the \gls{as} algorithm, which is the first one pertaining to \gls{aco} classes proposed.
-
+\bigskip
 \begin{algorithm}
 	\caption{The pseudocode of \gls{as}}
 	\label{alg:as}
@@ -60,7 +60,7 @@ Figure~\ref{fig:aco_exp_3} demonstrated the final experiment. Initially, only on
 		}
 	}
 \end{algorithm}
-
+\bigskip
 Initially, the trail intensity on all routes was initialized equal and regularly with a small value. Subsequently, the algorithm iterates itself until it accomplishes the termination criteria. This process consists of the following sequential stages: In the first stage, the ants start from their nest and find their way. To travel from node $i$ to $j$, the $k^{th}$ ant must choose an edge in the $available_k$ through a transition probability function:
 \begin{equation}
 \label{eq:aco_transition}
@@ -70,7 +70,7 @@ p^k_{ij} =
 	0, & \text{otherwise}
 \end{cases}
 \end{equation}
-where $\eta_{ij}$, which is equal to $1/d_{ij}$, defines the "attractive" of edge $(i,j)$ to the ant. $\alpha$ and $beta$ are two parameters that play roles in control the relative importance of the pheromone trail versus the ant's experience. Apparently, the route selection is a trade-off between routes that were most previously visited by the other ants in the colony or implementing an empirical greedy heuristic. 
+where $\eta_{ij}$, which is equal to $1/d_{ij}$, defines the "attractive" of edge $(i,j)$ to the ant. $\alpha$ and $\beta$ are two parameters that play roles in control the relative importance of the pheromone trail versus the ant's experience. Apparently, the route selection is a trade-off between routes that were most previously visited by the other ants in the colony or implementing an empirical greedy heuristic. 
 
 Whenever all ants have ended their journey at the destination, the pheromone trail $\tau_{ij}$ at time $t+n$ is updated based on the evaporation rate $\rho$ and the added pheromone of ants $\Delta \tau_{ij}$.  
 \begin{equation}

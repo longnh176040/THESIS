@@ -27,7 +27,7 @@ The Non-parametric statistic is used to compare the effectiveness of the followi
 
 Tables~\ref{tab:type_1} and \ref{tab:type_2} show the results of algorithms on different types of instances. The red, black, and blue cells in a column of \acrshort{gaco} in these tables denote instances where this algorithm is better, equal, and worse than the others.
 The results of Friedman's and Iman-Davenport's tests are shown in Table~\ref{tab:Results_Friedman}. As seen in the table, every Friedman and Iman-Davenport value surpasses the critical value. In addition, all $p$-values are less than 0.05, so all the null hypotheses, i.e., the equivalence of the medians of the results of the different benchmarks, are rejected. In other words, there are significant differences among the observed results with a probability error of $p \leq 0.05$. Table~\ref{tab:Results_Rank} illustrates the rankings achieved by the Friedman, Friedman Aligned, and Quade tests. The results in this table strongly indicate considerable differences between the algorithms.
-
+\bigskip
 \begin{table}
 	\centering
 	\caption{Results of the Friedman and Iman-Davenport test ($\alpha$=0.05)}
@@ -47,7 +47,8 @@ The results of Friedman's and Iman-Davenport's tests are shown in Table~\ref{tab
 		\end{tabular}
 	}
 \end{table}
-
+\bigskip
+\bigskip
 \begin{table}
 	\centering
 	\caption{Average rankings achiedved by the Friedman, Friedman Aligned, and Quade tests}\label{tab:Results_Rank}
@@ -63,7 +64,7 @@ The results of Friedman's and Iman-Davenport's tests are shown in Table~\ref{tab
 		\end{tabular}
 	}
 \end{table}
-
+\bigskip
 \begin{table}[!htp]
 	\centering
 	\caption{The z-values and p-values of the Friedman procedures (\glsentrytext{gaco} is the control algorithm)} 
@@ -87,9 +88,9 @@ The results of Friedman's and Iman-Davenport's tests are shown in Table~\ref{tab
 		\end{tabular}
 	}
 \end{table}
-
+\bigskip
 Table~\ref{tab:Results_Rank} also point out that the \acrshort{gaco} has the smallest ranking; thus, it is selected as the control algorithm. After that, we compare the control algorithm with two other ones (\acrshort{mfea-edu} and \acrshort{saco}) by using more powerful statistical methods, i.e., Holland and Holm. Table~\ref{tab:CompareControlAlg} shows all the possible hypotheses of comparison between the control algorithm and other algorithms, ordered by their $p$-value and associated with their level of significance. A common highlight from table~\ref{tab:Results_Friedman} is that the control algorithm outperforms \acrshort{saco} and \acrshort{mfea-edu} with a level of significance $\alpha = 0.05$.
-
+\bigskip
 \renewcommand{\scalefigure}{0.5}
 \begin{figure}[htbp]
 	\centering
@@ -97,10 +98,10 @@ Table~\ref{tab:Results_Rank} also point out that the \acrshort{gaco} has the sma
 	\caption{The obtained RPD values of all algorithms}
 	\label{fig:rpd}
 \end{figure}
-
+\bigskip
 \subsection{Analysis quality of the proposed algorithm in comparison with other algorithms}
 The experimental results shown in Table~\ref{tab:type_1} and Table~\ref{tab:type_2} have pointed out that \acrshort{gaco} outperforms \acrshort{saco} and \acrshort{mfea-edu} on both the best value, average, and standard deviation in most instances, except small instant Idpc\_10x10x1000. The box and whisker plots of each instance type and the three algorithms (\acrshort{gaco}, \acrshort{mfea-edu}, and \acrshort{saco}) are shown in Figure~\ref{fig:rpd}. Our algorithm finds the best solution every time, which is why the box and whisker plots in Type 1, Type 2, and All Types are reduced to single lines. The average \gls{pi} of \acrshort{gaco} compared to \acrshort{saco}, as shown in Table~\ref{tab:pi}, is 24.6\% in Type 1 and  18.7\% in Type 2. Meanwhile, the percentage for \acrshort{mfea-edu} is 21.0\% in Type 1 and 17.4\% in Type 2. Overall, the proposed \acrshort{gaco} improves \acrshort{mfea-edu}  19.4\% in terms of the average result, and the enormous gap recorded is 44.4\%.
-
+\bigskip
 \begin{table}[htbp]
 	\centering
 	\caption{The PI of \acrshort{gaco} compared to other algorithms}
@@ -119,7 +120,7 @@ The experimental results shown in Table~\ref{tab:type_1} and Table~\ref{tab:type
 	}
 	\label{tab:pi}%
 \end{table}%
-
+\bigskip
 \begin{table}[htbp]
 	\centering
 	\caption{The obtained results of all algorithms in Type 1}
@@ -158,7 +159,8 @@ The experimental results shown in Table~\ref{tab:type_1} and Table~\ref{tab:type
 	}
 	\label{tab:type_1}%
 \end{table}
-
+\bigskip
+\bigskip
 \begin{table}[htbp]
 	\centering
 	\caption{The obtained results of all algorithms in Type 2}
