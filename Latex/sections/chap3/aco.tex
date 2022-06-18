@@ -7,8 +7,24 @@ To travel from node $v_i$, the $k^{th}$ ant must choose an edge $e$ in the $Adj(
 \end{equation}
 where $P_e$ is the domain's priority of edge $e$ obtained from the input chromosome, and $\gamma$ is a constant representing the importance of this domain's priority value over the pheromone trail and ant's experience.
 
-As can be seen, the difference between the probability function of the proposed algorithm and Equation~\ref{eq:aco_transition} lies in $P_e$. Based on this value, the ant will be navigated to select edges by their domain priority instead of random probability selection, which makes it difficult to fulfill the \gls{du}.
-The process of an ant finding the destination is described in Algorithm~\ref{alg:apa}.
+As can be seen, the difference between the probability function of the proposed algorithm and Equation~\ref{eq:aco_transition} lies in $P_e$. Based on this value, the ant will be navigated to select edges by their domain priority instead of random probability selection, which makes it difficult to fulfill the \gls{du}. The process of an ant finding the destination is described in Algorithm~\ref{alg:apa}.
+\bigskip
+\setlength{\intextsep}{3pt}
+\renewcommand{\scalefigure}{1.1}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=\scalefigure]{Figures/chap 3/pACO.pdf}
+	\caption{An example of an ant find the next move}
+	\label{fig:pACO}
+\end{figure}
+
+Take the instance in Figure~\ref{fig:individual} as an illustration input of the lower level. Suppose there is an ant that is finding its way to the next node as shown in Figure~\ref{fig:pACO}. In this case, the ant will have to choose one of two paths with the same pheromone trail of 0.01. Therefore, two main factors affecting the ant's path selection include the edge weight and the domain priority of that edge. The ant will now compute the $P_e$ value of each edge as follows.
+
+$
+P_e~red~edge = 
+$
+
+
 
 \begin{algorithm}
 	%\setstretch{0.9}
