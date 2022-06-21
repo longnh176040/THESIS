@@ -7,7 +7,7 @@ To travel from node $v_i$, the $k^{th}$ ant must choose an edge $e$ in the $Adj(
 \end{equation}
 where $P_e$ is the domain's priority of edge $e$ obtained from the input chromosome, and $\gamma$ is a constant representing the importance of this domain's priority value over the pheromone trail and ant's experience.
 
-As can be seen, the difference between the probability function of the proposed algorithm and Equation~\ref{eq:aco_transition} lies in $P_e$. Based on this value, the ant will be navigated to select edges by their domain priority instead of random probability selection, which makes it difficult to fulfill the \gls{du}. The process of an ant finding the destination is described in Algorithm~\ref{alg:apa}.
+As can be seen, the difference between the probability function of the proposed algorithm and Equation~\ref{eq:aco_transition} lies in $P_e$. Based on this value, the ant will be navigated to select edges by their domain priority instead of random probability selection, which makes it difficult to fulfill the \gls{du}.
 \bigskip
 \setlength{\intextsep}{3pt}
 \renewcommand{\scalefigure}{1.1}
@@ -30,7 +30,7 @@ $
 p_e~blue~edge = \frac{0.01^2~\times~(1/3)^1~\times~0.2^2}{(0.01^2~\times~(1/1)^1~\times~0.8^2)~+~(0.01^2~\times~(1/3)^1~\times~0.2^2)} = \frac{1}{49}~\approx0.02
 $ \\ 
 
-It can be seen that the red edge has a higher ant selection rate (0.97 $>$ 0.02) due to its shorter path length and higher domain priority than the blue edge. In this step, Roulette Selection is implemented. Therefore, edges with a low selection rate can still be chosen by ants, which increases the exploitation capability of the colony and avoids falling into the local optima.
+It can be seen that the red edge has a higher ant selection rate (0.97 $>$ 0.02) due to its shorter path length and higher domain priority than the blue edge. In this step, Roulette Selection is implemented. Therefore, edges with a low selection rate can still be chosen by ants, which increases the exploitation capability of the colony and avoids falling into the local optima. The process of an ant finding the destination is described in Algorithm~\ref{alg:apa}.
 
 \begin{algorithm}
 	%\setstretch{0.9}
@@ -81,8 +81,8 @@ Typically, traditional \gls{aco} approaches have a potential drawback of prematu
 
 \subsection{Checksum}
 To ease the search for each ant, a second component is employed, coined $Checksum$. Before choosing an edge $e$, ant $k$ will sum its current path length and the weight of $e$. If this sum is greater than the currently found best solution, $e$ is removed from the candidate edge set. Checksum not only expedites the ant's search process but also ensures that the solution located will always be better than the previous one.
-Figure~\ref{fig:checksum} is a typical example of an ant checking the Checksum. Assume that the currently best solution found is 20 and the current path length of the considered ant is 17, and the \gls{du} are still satisfied.The ant will then sum its path value with each edge leading to the subsequent nodes. Following Checksum, the green edge leading to node 4 will be removed from the candidate edge set since $17 + 4 = 21 > 20$.
 
+\bigskip
 \setlength{\intextsep}{3pt}
 \renewcommand{\scalefigure}{1.1}
 \begin{figure}[htbp]
@@ -91,6 +91,9 @@ Figure~\ref{fig:checksum} is a typical example of an ant checking the Checksum. 
 	\caption{An example of an ant checking the Checksum}
 	\label{fig:checksum}
 \end{figure}
+\bigskip
+
+Figure~\ref{fig:checksum} is a typical example of an ant checking the Checksum. Assume that the currently best solution found is 20 and the current path length of the considered ant is 17, and the \gls{du} are still satisfied.The ant will then sum its path value with each edge leading to the subsequent nodes. Following Checksum, the green edge leading to node 4 will be removed from the candidate edge set since $17 + 4 = 21 > 20$.
 
 \subsection{Blacklist of Domains on each Node}
 One problem encountered when applying \gls{aco} to incomplete graphs is that ant gets stuck at a specific node since there is no subsequent path. Moreover, this phenomenon transpires more frequently in \gls{idpcdu}, where ant not only finds a path, but the path must also fulfill the \gls{du} constraint. In other words, a domain sequence is deemed to be stuck when an ant is unable to find any edges satisfying the \gls{du} constraint leading to one of the subsequent nodes. To remedy this shortcoming, an anti-stuck strategy for multi-domain problems like \gls{idpcdu} is proposed as follows. Except for the source and destination, every time an ant arrives at a stuck node, its list of visited domains is stored in the node's blacklist. Before deciding an edge $e$, the ant checks if the edge's domain $d$ is the one that causes a stuck of any sequence of domains in the blacklist of the node to which it leads. In such a case, the ant will continue to scan whether its list of visited domains is a superset of the other after discarding $d$. Consequently, $d$ will be removed from the candidate edge set if this point is satisfied. Algorithm~\ref{alg:blacklist} presents how to check if a list of domains is in the blacklist of any node. Note that before being saved to the blacklist as well as when the ant performs the $Domain~Blacklist~Check$, the domains will be sorted in a particular predefined order. Thus, the retrieval of data is performed faster, saving both time and resources.
