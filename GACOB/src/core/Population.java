@@ -3,85 +3,82 @@ package core;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
+
+import util.reproduction.Crossover;
+import util.reproduction.Mutation;
 
 public class Population {
     public int popSize; //Kích thước quần thể
     public ArrayList<Individual> population;
-    Task[] tasks;
+    Task task;
     int chromosomeLength = -1;
-    int taskNum;
 
-    public Population(Task[] tasks, int popSize) {
+    Random random;
+
+    public Population(Task task, int popSize) {
         this.popSize = popSize;
-        this.taskNum = tasks.length;
-        this.tasks = tasks;
-        for(Task t: tasks){
-            this.chromosomeLength = Math.max(this.chromosomeLength, t.domainNumber);
-        }
+        this.task = task;
+        
+        this.chromosomeLength = task.domainNumber;
         this.population = new ArrayList<Individual>();
+
+        random = Settings.random;
     }
 
     public void InitPopulation() {
         for (int i = 0; i < this.popSize; i++) {
-            Individual individual = new Individual(taskNum, chromosomeLength);
+            Individual individual = new Individual(chromosomeLength);
             individual.RandomInit();
-            int skill_factor = 1 + i % taskNum;
-            individual.skill_factor = skill_factor;
-            individual.EvaluateFitnessBestTask(tasks);
-            //individual.EvaluateFitnessAllTasks(tasks);
+            individual.EvaluateFitness(task);
             population.add(individual);
         }
     }
 
-    public void UpdateRank() {
-        for (int task = taskNum; task >= 1; task--) {
-            final int t = task;
-            //Sắp xếp fitness của quần thể theo thứ tự giảm dần ứng với từng tác vụ
-            Collections.sort(population, new Comparator<Individual>() {
-                @Override
-                public int compare(Individual o1, Individual o2) {
-                    return -Double.valueOf(o1.fitness[t-1]).compareTo(o2.fitness[t-1]);
-                }
-            });
-            //Cập nhật ranking của các cá thể ứng với tác vụ đang xét
-            for(int i = 0; i < population.size(); i++) {
-                population.get(i).rank[task-1] = i;
-            }
+    public ArrayList<Individual> Reproduction(Population population) {
+        ArrayList<Individual> offspringPop = new ArrayList<Individual>();
+
+        //List sử dụng cho việc shuffle + random + ....
+        ArrayList<Integer> randList = new ArrayList<Integer>();
+
+        for (int i = 0; i < population.popSize; i++) {
+            randList.add(i);
         }
 
-        // for (Individual indiv: population) {
-        //     System.out.println(indiv.rank[0] + " " + indiv.rank[1] + " " + indiv.fitness[0] + "\t" + indiv.fitness[1]);
-        // }
-    }
+        Collections.shuffle(randList, Settings.random);
 
-    public void UpdateScalarFitness() {
-        for (Individual individual : population) {
-            int minRank = Integer.MAX_VALUE;
-            // int bestTask = 0;
-            //Tìm kiếm tác vụ có rank cao nhất
-            for (int task = 1; task <= tasks.length; task++) {
-                if (minRank > individual.rank[task-1]) {
-                    minRank = individual.rank[task-1];
-                    // bestTask = task;
-                }
-                //Nếu rank của cả 2 tác vụ bằng nhau, random 1 trong 2
-                // else if (minRank == individual.rank[task-1]) {
-                //     if (Settings.random.nextDouble() < 0.5f) {
-                //         bestTask = task;
-                //     }
-                // }
+        while (offspringPop.size() < population.popSize) {
+            //Lấy ngẫu nhiên 2 cha mẹ trong quần thể (ko trùng)
+            int a = randList.get(random.nextInt(population.popSize / 2));
+            int b = randList.get(random.nextInt(population.popSize / 2) + population.popSize/2);
+            Individual parent1 = population.population.get(a);
+            Individual parent2 = population.population.get(b);
+            ArrayList<Individual> offspring; //List cá thể con đc sinh ra từ 2 cha mẹ
+
+            offspring = Crossover.SBXCrossover(parent1, parent2);
+            for (Individual individual : offspring) {
+                if (random.nextFloat() <= Settings.MUTATION_RATE)
+                Mutation.PolynomialMutation(individual);
             }
-            // individual.skill_factor = bestTask;
-            individual.scalar_fitness = (1.0/(minRank+1));
+
+            //population.SwapIndividuals(offspring.get(0), offspring.get(1));
+            //Đánh giá các cá thể với tác vụ
+            for (Individual individual : offspring) {
+                individual.EvaluateFitness(task);
+            }
+            
+            offspringPop.addAll(offspring);
         }
+        
+        return offspringPop;
     }
 
     public void Selection() {
-        //Sắp xếp quần thể theo scalar fitness giảm dần
+        //Sắp xếp quần thể theo fitness giảm dần
         Collections.sort(population, new Comparator<Individual>() {
             @Override
             public int compare(Individual o1, Individual o2) {
-                return -Double.valueOf(o1.scalar_fitness).compareTo(o2.scalar_fitness);
+                return -Double.valueOf(o1.fitness).compareTo(o2.fitness);
             }
         });
 

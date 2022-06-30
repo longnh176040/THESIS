@@ -28,6 +28,7 @@ public class Settings {
     public static final int GA_POPULATION_SIZE = 25;
     
     //=============REPRODUCTION params=============
+    public static final float MUTATION_RATE = 0.05f;
     public static final int SBX_nc = 2;
     public static final double SBX_MIN_LIMIT = 0.00001;
     public static final int PM_nm = 2;

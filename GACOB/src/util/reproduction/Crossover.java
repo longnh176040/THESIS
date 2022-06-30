@@ -21,8 +21,8 @@ public class Crossover {
         }
 
         //Tạo 2 cá thể mới
-        Individual child1 = new Individual(parent1.taskNum, parent1.chromosomeLength);
-        Individual child2 = new Individual(parent2.taskNum, parent2.chromosomeLength);
+        Individual child1 = new Individual(parent1.chromosomeLength);
+        Individual child2 = new Individual(parent2.chromosomeLength);
 
         for (int i = 0; i < betas.length; i++) {
             double v = 0.5*((1+betas[i]) * parent1.chromosome[i] + (1-betas[i]) * parent2.chromosome[i]);
