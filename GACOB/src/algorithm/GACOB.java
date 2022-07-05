@@ -55,8 +55,6 @@ public class GACOB {
             convergenceTrend[generation - 1] = bestIndividuals.fitness;
 
             System.out.println("Best individual " + population.population.get(0).cost);
-            System.out.println("Best individual " + population.population.get(1).cost);
-
         }
 
         System.out.println("Seed " + seed);
